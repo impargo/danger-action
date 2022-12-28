@@ -1,0 +1,17 @@
+name: 'PR Checks'
+description: 'custom conditions on pull requests'
+inputs:
+  GITHUB_TOKEN: 
+    description: 'github token'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: install
+      shell: bash
+      run: yarn
+    - name: custom checks
+      shell: bash
+      run: yarn danger ci
+      env:
+        DANGER_GITHUB_API_TOKEN: ${{ inputs.GITHUB_TOKEN }}
