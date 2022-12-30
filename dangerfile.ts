@@ -23,13 +23,15 @@ if (hasAppChanges && !hasTestChanges) {
   )
 }
 
-const hasDescTitlePattern = /(Fix|Feature|Refactor|Release|Hotfix|Migration)/im
+const hasDescTitlePattern = /(style|refactor|perf|feat|fix|docs|test|build|ci|migration)/im
 const hasDescTitle = hasDescTitlePattern.test(danger.github.pr.title)
 if (!hasDescTitle) {
   warn(
-    'In the PR title use tags [Fix], [Feature], [Refactor], [Release], [Hotfix], [Migration]',
+    'In the PR title use tags (fix), (feat), (refactor), (perf), (style), (docs), (test), (build), (ci) or (migration)',
+    
   )
 }
+
 const migrationPattern = /migration/im
 
 const hasMigrationChanges = allFiles.some((p) => p.includes('database-migration/'))
