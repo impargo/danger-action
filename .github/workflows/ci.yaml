@@ -1,0 +1,19 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  custom-pr-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps: 
+    - uses: actions/checkout@v2
+    - run: yarn install
+      name: Install packages
+    - run: npx danger ci
+      name: PR Checks
+      env:
+        DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+ 
