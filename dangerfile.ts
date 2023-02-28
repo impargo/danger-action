@@ -30,6 +30,16 @@ if (!hasDescTitle) {
   )
 }
 
+const reviewersCount = danger.github.requested_reviewers.users.length
+if (reviewersCount === 0) {
+  warn(`🕵 Whoops, I don't see any reviewers. Remember to add one.`)
+} else if (reviewersCount > 1) {
+  warn(
+    `It's great to have ${reviewersCount} reviewers. Remember though that more than 1 reviewer may lead to uncertainty as to who is responsible for the review.`
+  )
+}
+
+
 const migrationPattern = /migration/im
 
 const hasMigrationChanges = allFiles.some((p) => p.includes('migrations/'))
