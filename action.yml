@@ -7,6 +7,10 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - run: yarn install
+      name: Install packages
+      shell: bash
+      working-directory: ${{ github.action_path }}
     - name: custom checks
       shell: bash
       run: npx danger ci
