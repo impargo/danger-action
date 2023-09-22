@@ -48,14 +48,10 @@ if (migrationPattern.test(danger.github.pr.title) || hasMigrationChanges) {
   warn('Please Pay attention to the Migrations on dev')
   warn('Add a manual testing for the Migration in the description!')
   message(`
-  # Test MongoDB Database Migration Locally
-  - get the string connection of the database
-  - dump the collections that you want to test by \`mongodump --uri "DB_CONNECTION_STRING" --collection COLLECTION_NAME  -vvvv --forceTableScan --out -  >> COLLECTION_NAME.bson\`
-   > you need to do that for each collection
-  - restore the collections to a local MongoDB \`mongorestore --port <port> --db <destination database> --collection <collection-name> <data-dump-path/dbname/collection.bson> --drop\`
-  - change the local configs and secrets to use the local MongoDB.
-  - then run the Job using \`ENVIRONMENT=local skaffold run\`
-  - test it by starting the services and the front-end locally and make sure they use the local database.
+  # Test MongoDB Database Migration
+  - Run [Atlas Action](https://github.com/impargo/impargo-backend/actions/workflows/mongo-atlas.yml)
+  - To get the connection string, check the Connection String step.
+  - Use the connection string to connect to the database, from the code or Mongo Atlas ...etc.
   - if the migration works properly, then we can merge the PR to the dev, and the database migration job will apply the changes.
   `)
 }
